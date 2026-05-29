@@ -69,7 +69,9 @@ class Brian2Backend:
         self._stdp = STDPRule()
         self._noise_state = [0.0] * n_neurons
 
-    def run(self, duration_ms: float = 1000.0, dt: float = DT_MS) -> dict[str, object]:
+    def run(
+        self, duration_ms: float = 1000.0, dt: float = DT_MS
+    ) -> dict[str, float | int | list[dict[str, object]]]:
         """Simulate network for duration_ms and return spike statistics."""
         steps = int(duration_ms / dt)
         t = 0.0

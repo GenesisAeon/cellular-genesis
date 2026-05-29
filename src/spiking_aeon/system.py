@@ -52,7 +52,7 @@ class SpikingAeon:
         self._crep = CREPSNN()
         self._mapper = CREPtoWeightMapper()
         self._loihi = LoihiAdapter()
-        self._sim_results: dict[str, object] = {}
+        self._sim_results: dict[str, float | int | list[dict[str, object]]] = {}
         self._phase_events: list[dict[str, object]] = []
         self._run_meta: dict[str, object] = {}
 
@@ -76,14 +76,13 @@ class SpikingAeon:
             seed=self.seed,
         )
         self._sim_results = backend.run(duration_ms=duration_ms)
-        self._phase_events = list(
-            self._sim_results.get("phase_events", [])  # type: ignore[arg-type]
-        )
+        raw_events = self._sim_results.get("phase_events", [])
+        self._phase_events = list(raw_events) if isinstance(raw_events, list) else []
 
-        spike_coherence = float(self._sim_results.get("spike_coherence", 0.5))
-        mean_cv = float(self._sim_results.get("mean_isi_cv", 0.5))
-        normalised_rate = float(self._sim_results.get("normalised_rate", 0.32))
-        active_frac = float(self._sim_results.get("active_fraction", 0.8))
+        spike_coherence = self._fget("spike_coherence", 0.5)
+        mean_cv = self._fget("mean_isi_cv", 0.5)
+        normalised_rate = self._fget("normalised_rate", 0.32)
+        active_frac = self._fget("active_fraction", 0.8)
 
         # R: stochastic resonance proximity (low CV → high resonance)
         resonance_proximity = max(0.0, 1.0 - mean_cv)
@@ -105,7 +104,7 @@ class SpikingAeon:
             "duration_ms": duration_ms,
             "noise_amp": noise_amp,
             "elapsed_s": round(elapsed, 4),
-            "mean_rate_hz": self._sim_results.get("mean_rate_hz"),
+            "mean_rate_hz": self._fget("mean_rate_hz", 0.0),
             "phase_events_count": len(self._phase_events),
             "backend": "brian2_synthetic",
             "loihi2_available": self._loihi.is_available,
@@ -116,9 +115,14 @@ class SpikingAeon:
         """Return current CREP tensor {C, R, E, P, Gamma}."""
         return self._crep.as_dict()
 
+    def _fget(self, key: str, default: float) -> float:
+        """Type-safe float extraction from _sim_results."""
+        v = self._sim_results.get(key, default)
+        return float(v) if isinstance(v, (int, float)) else default
+
     def get_utac_state(self) -> dict[str, object]:
         """Return UTAC state {H, dH_dt, H_star, K_eff}."""
-        rate = float(self._sim_results.get("mean_rate_hz", FIRING_RATE_CRITICAL_HZ))
+        rate = self._fget("mean_rate_hz", FIRING_RATE_CRITICAL_HZ)
         h = rate / K_RATE
         h_star = FIRING_RATE_CRITICAL_HZ / K_RATE
         gamma = self._crep.gamma
@@ -190,7 +194,7 @@ class SpikingAeon:
         self,
         crep_state: dict[str, float] | None = None,
         duration_ms: float = DURATION_MS_DEFAULT,
-    ) -> dict[str, object]:
+    ) -> dict[str, float | int | list[dict[str, object]]]:
         """Software simulation fallback (no hardware needed)."""
         state = crep_state or self._crep.as_dict()
         lif_config = self._mapper.translate(state)
