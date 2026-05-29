@@ -40,7 +40,7 @@ class ATPDynamicsModel:
         self.bcl_xl = bcl_xl
         self.o2_fraction = o2_fraction
         self._rng = random.Random(seed)
-        self.history: list[dict] = []
+        self.history: list[dict[str, float]] = []
 
     @property
     def h_threshold(self) -> float:
@@ -67,7 +67,9 @@ class ATPDynamicsModel:
         """H(t) = ATP / K_ATP ∈ [0, 1]."""
         return self.atp / K_ATP
 
-    def run(self, duration_hours: float, dt: float = 0.1, stress: float = 0.0) -> list[dict]:
+    def run(
+        self, duration_hours: float, dt: float = 0.1, stress: float = 0.0
+    ) -> list[dict[str, float]]:
         t = 0.0
         self.history = []
         while t < duration_hours:

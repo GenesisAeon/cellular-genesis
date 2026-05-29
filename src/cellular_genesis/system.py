@@ -5,6 +5,8 @@ from __future__ import annotations
 import math
 import time
 
+from cellular_genesis.bcl_network import BclNetwork
+from cellular_genesis.caspase_cascade import CaspaseCascade
 from cellular_genesis.constants import (
     ATP_THRESHOLD_MM,
     BCL_XL_DEFAULT,
@@ -16,6 +18,7 @@ from cellular_genesis.constants import (
     SIGMA_CREP,
 )
 from cellular_genesis.crep_cellular import CREPCellular
+from cellular_genesis.mitochondria import MitochondriaModel
 from cellular_genesis.population import CellPopulation
 from cellular_genesis.resource_governor import ComputationalApoptosisGovernor
 
@@ -47,9 +50,9 @@ class CellularGenesis:
         self.seed = seed
         self._crep = CREPCellular()
         self._population: CellPopulation | None = None
-        self._run_results: list[dict] = []
+        self._run_results: list[dict[str, float]] = []
         self._governor = ComputationalApoptosisGovernor()
-        self._run_meta: dict = {}
+        self._run_meta: dict[str, object] = {}
 
     def run_cycle(
         self,
@@ -57,7 +60,7 @@ class CellularGenesis:
         duration_hours: float = DURATION_HOURS,
         stress: float = 0.0,
         dt: float = 0.5,
-    ) -> dict:
+    ) -> dict[str, object]:
         """Run one simulation cycle over `duration_hours` for `n_cells` cells."""
         t_start = time.perf_counter()
         self._population = CellPopulation(
@@ -65,18 +68,13 @@ class CellularGenesis:
         )
         self._run_results = self._population.run(duration_hours, dt=dt, stress=stress)
 
-        # Update CREP from final population state
         final = self._run_results[-1] if self._run_results else {}
-        survival = final.get("survival", 1.0)
-        entropy = final.get("entropy", 0.5)
+        survival = float(final.get("survival", 1.0))
+        entropy = float(final.get("entropy", 0.5))
 
-        # Derive representative cell CREP components
-        from cellular_genesis.bcl_network import BclNetwork
         bcl = BclNetwork(bcl_xl=self.bcl_xl)
-        from cellular_genesis.mitochondria import MitochondriaModel
         mito = MitochondriaModel(delta_psi_init=0.5 + survival * 0.45)
         mito.update(survival)
-        from cellular_genesis.caspase_cascade import CaspaseCascade
         casp = CaspaseCascade()
         casp.step(mito.cytochrome_c, dt=1.0)
 
@@ -98,17 +96,17 @@ class CellularGenesis:
         }
         return {**self._run_meta, "crep": self._crep.as_dict()}
 
-    def get_crep_state(self) -> dict:
+    def get_crep_state(self) -> dict[str, float]:
         """Return current CREP tensor {C, R, E, P, Gamma}."""
         return self._crep.as_dict()
 
-    def get_utac_state(self) -> dict:
+    def get_utac_state(self) -> dict[str, object]:
         """Return UTAC state {H, dH_dt, H_star, K_eff}."""
         if self._run_results:
             last = self._run_results[-1]
-            h = last.get("h", last.get("survival", 0.8))
+            h = float(last.get("h", last.get("survival", 0.8)))
         else:
-            h = K_ATP / K_ATP  # = 1.0 initially
+            h = 1.0
         H_star = ATP_THRESHOLD_MM / K_ATP
         gamma = self._crep.gamma
         h_star_crep = math.tanh(SIGMA_CREP * gamma)
@@ -121,13 +119,13 @@ class CellularGenesis:
             "below_threshold": h < H_star,
         }
 
-    def get_phase_events(self) -> list:
+    def get_phase_events(self) -> list[dict[str, object]]:
         """Each apoptotic commitment = one phase event."""
         if self._population is None:
             return []
         return self._population.phase_events
 
-    def to_zenodo_record(self) -> dict:
+    def to_zenodo_record(self) -> dict[str, object]:
         """Serialise full run to a Zenodo-compatible metadata record."""
         return {
             "title": "cellular-genesis: Apoptosis ATP Threshold UTAC Model (Package 25)",
@@ -166,9 +164,9 @@ class CellularGenesis:
             return 1.0
         for r in reversed(self._run_results):
             if r["t"] <= t:
-                return r["survival"]
-        return self._run_results[0]["survival"]
+                return float(r["survival"])
+        return float(self._run_results[0]["survival"])
 
-    def trigger_computational_apoptosis(self, node_id: str) -> dict:
+    def trigger_computational_apoptosis(self, node_id: str) -> dict[str, object]:
         """Interface to genesis-os resource governance."""
         return self._governor.trigger_computational_apoptosis(node_id)

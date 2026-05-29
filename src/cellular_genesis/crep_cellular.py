@@ -37,7 +37,7 @@ class CREPCellular:
         """Reference Γ_cellular = arctanh(η_apoptosis) / σ ≈ 0.090."""
         return GAMMA_CELLULAR
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, float]:
         return {
             "C": self.C,
             "R": self.R,

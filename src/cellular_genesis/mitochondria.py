@@ -21,7 +21,7 @@ class MitochondriaModel:
         self.delta_psi = delta_psi_init
         self.cytochrome_c = 0.0   # released fraction [0, 1]
 
-    def update(self, atp_normalised: float, dt: float = 0.1) -> dict:
+    def update(self, atp_normalised: float, dt: float = 0.1) -> dict[str, float]:
         """Update Δψ and cytochrome c based on current ATP level."""
         # Δψ tracks ATP with slight lag
         target_psi = atp_normalised

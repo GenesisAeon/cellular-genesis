@@ -6,7 +6,7 @@ from cellular_genesis.constants import BENCHMARK_TARGETS, GAMMA_CELLULAR
 from cellular_genesis.system import CellularGenesis
 
 
-def run_benchmark(n_cells: int = 200, duration_hours: float = 72.0) -> dict:
+def run_benchmark(n_cells: int = 200, duration_hours: float = 72.0) -> dict[str, object]:
     """Run benchmark suite and return pass/fail results."""
     sim = CellularGenesis(n_cells=n_cells, seed=42)
     sim.run_cycle(n_cells=n_cells, duration_hours=duration_hours, stress=0.3)

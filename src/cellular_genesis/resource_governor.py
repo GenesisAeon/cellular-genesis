@@ -3,8 +3,15 @@
 from __future__ import annotations
 
 import time
+from typing import TypedDict
 
 from cellular_genesis.constants import RESOURCE_ATP_THRESHOLD
+
+
+class _NodeState(TypedDict):
+    resource: float
+    alive: bool
+    registered_at: float
 
 
 class ComputationalApoptosisGovernor:
@@ -18,15 +25,15 @@ class ComputationalApoptosisGovernor:
 
     def __init__(self, threshold: float = RESOURCE_ATP_THRESHOLD) -> None:
         self.threshold = threshold
-        self._nodes: dict[str, dict] = {}
-        self.events: list[dict] = []
+        self._nodes: dict[str, _NodeState] = {}
+        self.events: list[dict[str, object]] = []
 
     def register_node(self, node_id: str, resource_level: float = 1.0) -> None:
-        self._nodes[node_id] = {
-            "resource": resource_level,
-            "alive": True,
-            "registered_at": time.time(),
-        }
+        self._nodes[node_id] = _NodeState(
+            resource=resource_level,
+            alive=True,
+            registered_at=time.time(),
+        )
 
     def update_resource(self, node_id: str, resource_level: float) -> None:
         if node_id in self._nodes:
@@ -40,13 +47,13 @@ class ComputationalApoptosisGovernor:
                 triggered.append(nid)
         return triggered
 
-    def trigger_computational_apoptosis(self, node_id: str) -> dict:
+    def trigger_computational_apoptosis(self, node_id: str) -> dict[str, object]:
         """Mark node as apoptotic, log Phase Transition Event."""
         if node_id not in self._nodes:
             return {"error": f"unknown node {node_id}"}
         node = self._nodes[node_id]
         node["alive"] = False
-        event = {
+        event: dict[str, object] = {
             "node_id": node_id,
             "resource_at_death": node["resource"],
             "timestamp": time.time(),
