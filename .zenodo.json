@@ -1,0 +1,14 @@
+{
+  "title": "cellular-genesis: Apoptosis ATP Threshold UTAC Model — GenesisAeon Package 25",
+  "description": "UTAC simulation of programmed cell death (apoptosis). Models intracellular ATP dynamics, mitochondrial membrane potential, Bcl-2/Bcl-xL anti-apoptotic network, ultrasensitive caspase cascade, and CREP criticality tensor (Γ ≈ 0.090) for cell populations. Part of the GenesisAeon Entropy Atlas (Packages 17–30).",
+  "creators": [{"name": "Römer, Johann", "affiliation": "MOR Research Collective"}],
+  "keywords": ["apoptosis", "ATP threshold", "UTAC", "CREP", "caspase", "mitochondria", "programmed cell death", "cellular criticality", "GenesisAeon", "entropy atlas", "Package 25"],
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open",
+  "related_identifiers": [
+    {"identifier": "10.3389/fcell.2025.1611055", "relation": "isCitedBy", "scheme": "doi"},
+    {"identifier": "10.5281/zenodo.19645351", "relation": "isDocumentedBy", "scheme": "doi"}
+  ],
+  "version": "0.1.0"
+}
