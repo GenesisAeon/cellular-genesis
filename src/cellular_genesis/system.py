@@ -7,7 +7,6 @@ import time
 
 from cellular_genesis.constants import (
     ATP_THRESHOLD_MM,
-    BENCHMARK_TARGETS,
     BCL_XL_DEFAULT,
     DURATION_HOURS,
     GAMMA_CELLULAR,

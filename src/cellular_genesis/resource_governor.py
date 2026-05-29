@@ -22,7 +22,11 @@ class ComputationalApoptosisGovernor:
         self.events: list[dict] = []
 
     def register_node(self, node_id: str, resource_level: float = 1.0) -> None:
-        self._nodes[node_id] = {"resource": resource_level, "alive": True, "registered_at": time.time()}
+        self._nodes[node_id] = {
+            "resource": resource_level,
+            "alive": True,
+            "registered_at": time.time(),
+        }
 
     def update_resource(self, node_id: str, resource_level: float) -> None:
         if node_id in self._nodes:

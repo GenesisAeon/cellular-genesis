@@ -2,11 +2,9 @@
 
 import math
 
-import pytest
-
 from cellular_genesis.atp_dynamics import ATPDynamicsModel
 from cellular_genesis.caspase_cascade import CaspaseCascade
-from cellular_genesis.constants import GAMMA_CELLULAR, ATP_THRESHOLD_MM, K_ATP
+from cellular_genesis.constants import ATP_THRESHOLD_MM, GAMMA_CELLULAR, K_ATP
 from cellular_genesis.crep_cellular import CREPCellular
 from cellular_genesis.system import CellularGenesis
 

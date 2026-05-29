@@ -71,7 +71,6 @@ class CellPopulation:
         atps = [c["atp"].atp for c in self._cells if c["alive"]]
         if len(atps) < 2:
             return 0.0
-        mu = statistics.mean(atps)
         sigma = statistics.stdev(atps)
         # Normalise to [0, 1] via logistic
         return 1.0 / (1.0 + math.exp(-sigma))
