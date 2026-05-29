@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 
-import math
-
 from cellular_genesis.constants import (
-    CYTOC_THRESHOLD,
     HILL_N,
     K_CASP_ACT,
     K_CASP_INH,

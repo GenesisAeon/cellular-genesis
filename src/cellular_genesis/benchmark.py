@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import math
-
 from cellular_genesis.constants import BENCHMARK_TARGETS, GAMMA_CELLULAR
 from cellular_genesis.system import CellularGenesis
 

@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import math
 
-from cellular_genesis.constants import ATP_THRESHOLD_MM, K_ATP
-
 
 class MitochondriaModel:
     """
