@@ -16,5 +16,5 @@
     {"identifier": "10.3389/fnins.2025.1676570", "relation": "isCitedBy", "scheme": "doi"},
     {"identifier": "10.5281/zenodo.19645351", "relation": "isDocumentedBy", "scheme": "doi"}
   ],
-  "version": "0.2.0"
+  "version": "1.0.0"
 }

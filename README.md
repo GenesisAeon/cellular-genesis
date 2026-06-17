@@ -178,7 +178,13 @@ src/
 
 ---
 
-## BibTeX
+## Citation
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19645351.svg)](https://doi.org/10.5281/zenodo.19645351)
+
+This repository already has Zenodo–GitHub integration enabled and an
+assigned concept DOI (`10.5281/zenodo.19645351`). New GitHub Releases mint
+updated version DOIs automatically.
 
 ```bibtex
 @software{romer2026genesis_atlas,
