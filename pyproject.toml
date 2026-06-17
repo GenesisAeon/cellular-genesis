@@ -1,6 +1,6 @@
 [project]
 name = "diamond-setup"
-version = "0.2.0"
+version = "1.0.0"
 description = "GenesisAeon Entropy Atlas — Packages 25 (Apoptosis) & 26 (Neuromorphic SNN)"
 readme = "README.md"
 license = { text = "MIT" }
