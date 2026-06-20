@@ -3,12 +3,12 @@
 **Package 25: Apoptosis / Programmed Cell Death ATP Threshold**
 **Package 26: Neuromorphic SNN Hardware Bridge (Intel Loihi 2)**
 
-[![CI](https://github.com/GenesisAeon/diamond-setup/actions/workflows/ci.yml/badge.svg)](https://github.com/GenesisAeon/diamond-setup/actions/workflows/ci.yml)
+[![CI](https://github.com/GenesisAeon/cellular-genesis/actions/workflows/ci.yml/badge.svg)](https://github.com/GenesisAeon/cellular-genesis/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19645351.svg)](https://doi.org/10.5281/zenodo.19645351)
-[![Package 25](https://img.shields.io/badge/GenesisAeon-Package%2025-purple)](https://github.com/GenesisAeon/diamond-setup)
-[![Package 26](https://img.shields.io/badge/GenesisAeon-Package%2026-blueviolet)](https://github.com/GenesisAeon/diamond-setup)
+[![Package 25](https://img.shields.io/badge/GenesisAeon-Package%2025-purple)](https://github.com/GenesisAeon/cellular-genesis)
+[![Package 26](https://img.shields.io/badge/GenesisAeon-Package%2026-blueviolet)](https://github.com/GenesisAeon/cellular-genesis)
 [![Whitepaper](https://img.shields.io/badge/DOI-10.3389%2Ffcell.2025.1611055-orange)](https://doi.org/10.3389/fcell.2025.1611055)
 [![NeuEdge](https://img.shields.io/badge/arXiv-2602.02439-red)](https://arxiv.org/abs/2602.02439)
 
@@ -116,16 +116,16 @@ print(f"Optimal noise D_res = {sr['D_res']:.3f}  (min CV = {sr['min_CV']:.3f})")
 
 ```bash
 # Package 25 (apoptosis) — includes numpy/scipy
-pip install "diamond-setup[cellular]"
+pip install "cellular-genesis[cellular]"
 
 # Package 26 (SNN) — includes numpy
-pip install "diamond-setup[spiking]"
+pip install "cellular-genesis[spiking]"
 
 # Both packages
-pip install "diamond-setup[cellular,spiking]"
+pip install "cellular-genesis[cellular,spiking]"
 
 # Base (no scientific dependencies)
-pip install diamond-setup
+pip install cellular-genesis
 ```
 
 ---

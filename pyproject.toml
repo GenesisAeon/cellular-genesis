@@ -1,5 +1,5 @@
 [project]
-name = "diamond-setup"
+name = "cellular-genesis"
 version = "1.0.0"
 description = "GenesisAeon Entropy Atlas — Packages 25 (Apoptosis) & 26 (Neuromorphic SNN)"
 readme = "README.md"
@@ -48,10 +48,10 @@ spiking = [
 diamond = "diamond_setup.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/GenesisAeon/diamond-setup"
-Repository = "https://github.com/GenesisAeon/diamond-setup"
-Documentation = "https://genesisaeon.github.io/diamond-setup"
-Issues = "https://github.com/GenesisAeon/diamond-setup/issues"
+Homepage = "https://github.com/GenesisAeon/cellular-genesis"
+Repository = "https://github.com/GenesisAeon/cellular-genesis"
+Documentation = "https://genesisaeon.github.io/cellular-genesis"
+Issues = "https://github.com/GenesisAeon/cellular-genesis/issues"
 Zenodo = "https://doi.org/10.5281/zenodo.XXXXXXX"
 
 [build-system]
