@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
+### Changed
+- PyPI distribution name changed from `diamond-setup` to `cellular-genesis`
+  to match the GitHub repository name and the GenesisAeon ecosystem
+  registry entry for Package 25. The bundled `diamond_setup` scaffold
+  tool keeps its own module/CLI name (`diamond` command,
+  `src/diamond_setup`); only the top-level package name that `pip`
+  resolves has changed.
 
 ## [1.0.0] - 2026
 ### Added
@@ -20,8 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   1.0.0.
 
 ### Note
-- This repository publishes under the PyPI name `diamond-setup` and bundles
-  three packages (`diamond_setup`, `cellular_genesis` — Package 25, and
-  `spiking_aeon` — Package 26). The GenesisAeon ecosystem registry lists
-  `cellular-genesis` (P25) as a standalone entry; see the release PR
-  description for details on this naming discrepancy.
+- At the time of this release, this repository published under the PyPI
+  name `diamond-setup` and bundled three packages (`diamond_setup`,
+  `cellular_genesis` — Package 25, and `spiking_aeon` — Package 26). The
+  PyPI name was subsequently changed to `cellular-genesis` — see the
+  `[Unreleased]` entry above.

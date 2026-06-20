@@ -7,9 +7,9 @@ No cookiecutter, no Jinja2, no magic. Just a clean CLI, sensible templates, and 
 ## Quickstart
 
 ```bash
-pip install diamond-setup
+pip install cellular-genesis
 # or with uv:
-uv tool install diamond-setup
+uv tool install cellular-genesis
 ```
 
 ```bash
