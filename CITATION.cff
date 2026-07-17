@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "cellular-genesis"
+version: "1.0.0"
+date-released: "2026-06-17"
+authors:
+  - name: "GenesisAeon"
+repository-code: "https://github.com/GenesisAeon/cellular-genesis"
+license: MIT
+abstract: "GenesisAeon Entropy Atlas — Packages 25 (Apoptosis) & 26 (Neuromorphic SNN)"
+keywords:
+  - GenesisAeon
+  - UTAC
+  - CREP
+  - open-science
+  - scaffold
+  - template
+  - cli
+  - project-generator
